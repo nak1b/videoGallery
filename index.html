@@ -6,7 +6,9 @@
  <meta charset="utf-8" />
  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1" />
- <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+ <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+ <script type="text/javascript" src="js/script.js"></script>
+ <link rel="stylesheet" type="text/css" href="style/style.css">
  <style type="text/css">
  
 
@@ -15,10 +17,71 @@
  </head>
  
  <body>
-	
+ 	<nav id="navbar">
+ 		<h2 id="brand">VIDEO GALLERY</h2>
+ 		
+ 	</nav>
 
+	<div id="container">
+		<div id="main-video">
+			<iframe id="vdo" name="iframe" width="560" height="315" src="http://www.youtube.com/embed/-0zo3vbqJOE?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>
+		</div>
+
+		<div id="thumbnail">
+			<div class="thumb">
+				<img src="img/1.jpg" name="90299717" video-src="vimeo">
+			</div>
+			<div class="thumb">
+				<img src="img/2.jpg" name="NUsoVlDFqZg" video-src="youtube">
+			</div>
+			<div class="thumb">
+				<img src="img/3.jpg" name="0KSOMA3QBU0" video-src="youtube">
+			</div>
+			<div class="thumb">
+				<img src="img/4.jpg" name="93972085" video-src="vimeo">
+			</div>
+			<div class="thumb">
+				<img src="img/5.jpg" name="HkMNOlYcpHg" video-src="youtube">
+			</div>
+			<div class="thumb">
+				<img src="img/6.jpg" name="TGtWWb9emYI" video-src="youtube">
+			</div>
+			<div class="thumb">
+				<img src="img/7.jpg" name="7-7knsP2n5w" video-src="youtube">
+			</div>
+		</div>
+	</div>	
+ 	q
  <script type="text/javascript">
- 	
+
+ 	$(".thumb img").click(function()
+ 	{
+ 		var video_id = $(this).attr("name");
+ 		var video_source = $(this).attr("video-src");
+ 		var link = create_embedded_link(video_id, video_source);
+ 		$("#vdo").attr("src", link);
+ 		$("iframe").load()
+ 	});
+
+
+ 	/*************************************************
+ 	  Create Embedded link from regular video url for 
+ 	  embedding it to to the video container 
+ 	************************************************/
+ 	function create_embedded_link(video_id, source)
+ 	{
+ 		var url = "";
+
+ 		if(source=="youtube")
+ 		{
+ 			url = "http://www.youtube.com/embed/" + video_id + "?rel=0&autoplay=1";
+ 		}
+ 		else if(source=="vimeo")
+ 		{
+ 			url = "http://player.vimeo.com/video/" + video_id + "?autoplay=1";
+ 		}
+ 		return url;
+ 	}
  	
  </script>
 
