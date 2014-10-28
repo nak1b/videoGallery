@@ -56,11 +56,17 @@
 
  	$(".thumb img").click(function()
  	{
+ 		
+ 		x = get_vimeo_video_id("http://www.vimeo.com/90299717")
+ 		alert(x.video_id);
  		var video_id = $(this).attr("name");
  		var video_source = $(this).attr("video-src");
  		var link = create_embedded_link(video_id, video_source);
  		$("#vdo").attr("src", link);
  		$("iframe").load()
+
+ 		
+
  	});
 
 
@@ -82,6 +88,53 @@
  		}
  		return url;
  	}
+
+ 	function get_youtube_video_id(url)
+ 	{
+ 		var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+	    var match = url.match(regExp);
+
+	    if(match&&match[7].length==11)
+	    {
+	        return match[7];
+	    }
+	    else
+	    {
+	        alert("URL incorrect!");
+	    }
+ 	}
+
+ 	function get_vimeo_video_id_and_thumb(url)
+ 	{
+ 		var json_url = "http://vimeo.com/api/oembed.json?url=" + url;
+ 		var video_info = {};
+
+ 		$.get(json_url, function(data)
+ 		{
+ 			video_info.video_id = data["video_id"];
+ 			video_info.thumbnail = data["thumbnail_url"];
+
+ 			return video_info;
+ 		});
+ 	}
+
+ 	function identify_video_source(url)
+ 	{
+ 		var video_source = "";
+ 		if(url.toLowerCase().indexOf("youtube.com") >= 0)
+ 			video_source = "youtube";
+ 		else if(url.toLowerCase().indexOf("vimeo.com") >= 0)
+ 			video_source = "vimeo";
+
+ 		return video_source;
+ 	}
+
+ 	function get_youtube_thumbnail(video_id)
+ 	{
+ 		var img_url = "http://img.youtube.com/vi/" + video_id + "/0.jpg";
+ 		return img_url;
+ 	}
+ 		
  	
  </script>
 
