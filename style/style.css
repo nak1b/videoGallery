@@ -4,7 +4,7 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 {
 	width: 100%;
 	height: 46px;
-	background-color: rgb(106, 161, 210);
+	background-color: #16a085;
 	margin-bottom: 20px;
 	box-shadow: 1px 2px 5px #e3e3e3;
 }
@@ -14,7 +14,7 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 	margin:0px;
 	padding: 10px 0px 0px 65px;
 	font-size: 1.3em;
-	color: #AAC7DB;
+	color: #ecf0f1;
 	text-shadow:1px 1px 1px rgb(49, 118, 180);
 }
 
@@ -28,22 +28,22 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 #main-video
 {
 	width: 70%;
-	height: 400px;
-	background-color: #e3e3e3;
+	height: 450px;
+	background-color: #ecf0f1;
 	float: left;
 	text-align: center;
 }
 
 #main-video iframe
 {
-	margin-top: 30px;
+	margin-top: 40px;
 }
 
 #thumbnail
 {
 	width: 30%;	
-	height: 400px;
-	background-color: #C5C5C5;
+	height: 450px;
+	background-color: #DEDEDE;
 	float: right;
 	overflow: scroll;
 }
@@ -52,14 +52,15 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 {
 	float: none;
 	margin: 20px auto;
-	width: 280px;
-	height: 140px;
-	background-color: #e3e3e3;
+	width: 290px;
+	height: 160px;
+	background-color: #ecf0f1;
 }
 
 .thumb img
 {
-	width: 270px;
-	height: 130px;
-	padding: 5px;
+	width: 290px;
+	height: 160px;
+	cursor: pointer;
+
 }
