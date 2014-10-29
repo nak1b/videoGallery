@@ -3,7 +3,8 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 #navbar
 {
 	width: 100%;
-	height: 46px;
+	min-width: 800px;
+	height: 52px;
 	background-color: #16a085;
 	margin-bottom: 20px;
 	box-shadow: 1px 2px 5px #e3e3e3;
@@ -12,10 +13,52 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 #navbar h2
 {
 	margin:0px;
-	padding: 10px 0px 0px 65px;
+	width: 30%;
+	padding: 15px 0px 0px 65px;
 	font-size: 1.3em;
 	color: #ecf0f1;
 	text-shadow:1px 1px 1px rgb(49, 118, 180);
+}
+
+
+#add_url
+{
+	float: right;
+	position: relative;
+	top: -26px;
+	right: 100px;
+}
+
+
+#user_url
+{
+  display: inline;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+#add
+{
+	border: none;
+	width: 60px;
+	padding: 6px;
+	margin-left: 10px;
+	background-color: #bdc3c7;
+	color: #333;
+	font-family: sans-serif;
+	font-size: 0.9em;
+	font-weight: bold;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+#add:hover
+{
+	background-color: #9FA3A6;
 }
 
 #container
@@ -64,3 +107,4 @@ body{margin: 0px; padding: 0px;font-family: sans-serif, helvetica, arial;}
 	cursor: pointer;
 
 }
+

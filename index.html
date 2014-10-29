@@ -20,8 +20,11 @@
  	<nav id="navbar">
  		<h2 id="brand">VIDEO GALLERY</h2>
  		
- 		
- 		 
+ 		<div id="add_url">
+ 			<input type="text" placeholder="Video URL" id="user_url">
+ 			<input type="submit" value="Add" id="add">
+ 		</div>
+ 				
 
  	</nav>
 
@@ -56,7 +59,7 @@
 		$("#thumbnail").append(div);
 	}
 
-	//Channgin the playing video to the one clicked 
+	//Changeing the playing video to the one clicked on
  	$(".thumb img").click(function()
  	{
  		var video_id = $(this).attr("name");
@@ -66,6 +69,42 @@
  		$("iframe").load()
  	});
 
+
+ 	$("#add").click(function(){
+ 		var url = document.getElementById("user_url").value;
+ 		if(validate_url(url))
+ 		{
+ 			add_and_play_video(url);
+ 		}
+ 		else
+ 		{
+ 			alert("Add Validate url from youtube and vimeo only");
+ 		}
+ 		
+ 	});
+
+ 	function validate_url(url)
+ 	{
+ 		var youtube_regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+ 		var vimeo_regExp = /^(http\:\/\/|https\:\/\/)?(www\.)?(vimeo\.com\/)([0-9]+)$/;
+	    if(url.match(youtube_regExp) || url.match(vimeo_regExp))
+		    return true;
+
+		return false;
+ 	}
+ 	/***************************************************************************************
+ 	  Add or append new video to the sidebar and play the newly added video
+ 	****************************************************************************************/
+ 	function add_and_play_video(url)
+ 	{
+ 		var url_details = video_details(url);
+		var div = '<div class="thumb"><img src="' + url_details[1] + '" name="' + url_details[0] + '" video-src="' + url_details[2] + '" /></div>'
+		$("#thumbnail").append(div);
+
+		var embed_link = create_embedded_link(url_details[0], url_details[2]);
+		$("#vdo").attr("src", embed_link);
+ 		$("iframe").load()
+ 	}
 
  	/***************************************************************************************
  	  Create Embedded link from regular video url for embedding it to to the video container 
