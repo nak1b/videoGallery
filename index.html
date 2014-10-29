@@ -39,6 +39,8 @@
 	</div>	
  	
  <script type="text/javascript">
+  var d = youtube_video_duration("http://www.youtube.com/watch?v=EzDue9aeC0A");
+  alert(d);
 
  	var links = ["http://vimeo.com/90299717", "http://www.youtube.com/watch?v=NUsoVlDFqZg",
 				 "http://www.youtube.com/watch?v=0KSOMA3QBU0", "http://vimeo.com/93972085",
@@ -83,6 +85,34 @@
  		
  	});
 
+
+	/***************************************************************************************
+ 	  Get duration of youtube videos in seconds
+ 	****************************************************************************************/
+ 	function youtube_video_duration(url)
+ 	{
+ 		var video_id = get_youtube_video_id(url);
+ 		var json_url = 'http://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=jsonc'
+		var result, duration;
+
+		$.ajax(
+ 		{
+ 			url: json_url,
+ 			async: false,
+ 			success: function(data)
+ 			{
+ 				result = data.data;
+ 			}
+ 		});
+
+ 		duration = result.duration;
+
+ 		return duration;
+ 	}
+
+ 	/***************************************************************************************
+ 	  Validate if url you are trying to add is valid youtube and vimeo url
+ 	****************************************************************************************/
  	function validate_url(url)
  	{
  		var youtube_regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
