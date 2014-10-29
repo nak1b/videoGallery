@@ -1,19 +1,16 @@
 <!doctype html>
 <html>
  <head>
- <title>Video Gallery</title>
- 
- <meta charset="utf-8" />
- <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1" />
- <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
- <script type="text/javascript" src="js/script.js"></script>
- <link rel="stylesheet" type="text/css" href="style/style.css">
- <style type="text/css">
- 
+	 <title>Video Gallery</title>
+	 
+	 <meta charset="utf-8" />
+	 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
- </style>
- 
+	 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	 <script type="text/javascript" src="js/script.js"></script>
+
+	 <link rel="stylesheet" type="text/css" href="style/style.css">
  </head>
  
  <body>
@@ -24,8 +21,6 @@
  			<input type="text" placeholder="Video URL" id="user_url">
  			<input type="submit" value="Add" id="add">
  		</div>
- 				
-
  	</nav>
 
 	<div id="container">
@@ -34,24 +29,24 @@
 		</div>
 
 		<div id="thumbnail">
-
 		</div>
 	</div>	
- 	
+ 
+
  <script type="text/javascript">
-  var d = youtube_video_duration("http://www.youtube.com/watch?v=EzDue9aeC0A");
-  alert(d);
 
  	var links = ["http://vimeo.com/90299717", "http://www.youtube.com/watch?v=NUsoVlDFqZg",
 				 "http://www.youtube.com/watch?v=0KSOMA3QBU0", "http://vimeo.com/93972085",
 				 "http://www.youtube.com/watch?v=HkMNOlYcpHg", "http://www.youtube.com/watch?v=TGtWWb9emYI",
 				 "http://www.youtube.com/watch?v=7-7knsP2n5w"]
 	
+	//Ad link
+	var ad_link = "http://www.youtube.com/watch?v=EzDue9aeC0A"; 
+	
 
 	//Generating and playing random video everytime page is loaded
-	var random_link = select_random_video(links);
-	$("#vdo").attr("src", random_link);
- 	$("iframe").load()
+	var random_embed_link = select_random_video(links);
+	play_video(random_embed_link, ad_link);
 
 	for(var i=0; i<links.length; i++)
 	{
@@ -66,9 +61,8 @@
  	{
  		var video_id = $(this).attr("name");
  		var video_source = $(this).attr("video-src");
- 		var link = create_embedded_link(video_id, video_source);
- 		$("#vdo").attr("src", link);
- 		$("iframe").load()
+ 		var embed_link = create_embedded_link(video_id, video_source);
+ 		play_video(embed_link, ad_link);
  	});
 
 
@@ -85,9 +79,30 @@
  		
  	});
 
+ 	
+
+ 	/***************************************************************************************
+ 	  Playing video i.e changin the iframe source and reloading it
+ 	****************************************************************************************/
+ 	function play_video(embed_link, ad_link, ad_time)
+ 	{
+ 		var ad_video_id = get_youtube_video_id(ad_link);
+		var ad_embed_link = create_embedded_link(ad_video_id, "youtube");
+		var ad_time = youtube_video_duration(ad_link);
+
+		//playing ad
+		$("#vdo").attr("src", ad_embed_link);
+ 		$("iframe").load()
+
+ 		//playing video after ad is completed
+ 		setTimeout(function(){
+ 			$("#vdo").attr("src", embed_link);
+ 			$("iframe").load()
+ 		}, ad_time);
+ 	}
 
 	/***************************************************************************************
- 	  Get duration of youtube videos in seconds
+ 	  Get duration of youtube videos in milli seconds
  	****************************************************************************************/
  	function youtube_video_duration(url)
  	{
@@ -105,7 +120,7 @@
  			}
  		});
 
- 		duration = result.duration;
+ 		duration = result.duration*1000;
 
  		return duration;
  	}
@@ -132,8 +147,7 @@
 		$("#thumbnail").append(div);
 
 		var embed_link = create_embedded_link(url_details[0], url_details[2]);
-		$("#vdo").attr("src", embed_link);
- 		$("iframe").load()
+		play_video(embed_link, ad_link);
  	}
 
  	/***************************************************************************************
@@ -253,7 +267,7 @@
  		return embed_link;
  	}
 
- </script>
+</script>
 
 </body>
 </html>
