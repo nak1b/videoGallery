@@ -11,8 +11,10 @@
 		$("#vdo").attr("src", ad_embed_link);
  		$("iframe").load()
 
- 		//playing video after ad is completed
- 		setTimeout(function(){
+ 		//Clearing any setTimeout and playing video after ad is completed
+ 		clearTimeout(timeouts);
+
+ 		timeouts = setTimeout(function(){
  			$("#vdo").attr("src", embed_link);
  			$("iframe").load()
  		}, ad_time);

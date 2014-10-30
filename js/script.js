@@ -6,6 +6,7 @@ var links = ["http://vimeo.com/90299717", "http://www.youtube.com/watch?v=NUsoVl
 //Ad link
 var ad_link = "http://www.youtube.com/watch?v=EzDue9aeC0A"; 
 	
+var timeouts;
 
 //Generating and playing random video everytime page is loaded
 var random_embed_link = select_random_video(links);
